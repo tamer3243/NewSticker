@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 7832876d5e8a4bc4fbffb7ce6f840794
+guid: ffa2908d57a8ad24e9297db5a5c6e4de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7308371618840492704
-    second: my-meiker-1742039930951398 2_0
-  - first:
-      213: 7539196088841583834
-    second: my-meiker-1742039930951398 2_1
-  - first:
-      213: -8071425741008839864
-    second: my-meiker-1742039930951398 2_2
+      213: 5306571962453655275
+    second: 96a8247e-4646-4092-b562-63ec2232d03e (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 402.54
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,57 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: my-meiker-1742039930951398 2_0
+      name: 96a8247e-4646-4092-b562-63ec2232d03e (1)_0
       rect:
         serializedVersion: 2
         x: 59
-        y: 392
-        width: 27
-        height: 43
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0aab883144d8c6560800000000000000
-      internalID: 7308371618840492704
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: my-meiker-1742039930951398 2_1
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 390
-        width: 30
-        height: 44
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: adcba6ff5ea90a860800000000000000
-      internalID: 7539196088841583834
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: my-meiker-1742039930951398 2_2
-      rect:
-        serializedVersion: 2
-        x: 108
         y: 42
-        width: 603
-        height: 1071
+        width: 588
+        height: 1101
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84b59348d098cff80800000000000000
-      internalID: -8071425741008839864
+      spriteID: beef81d951bb4a940800000000000000
+      internalID: 5306571962453655275
       vertices: []
       indices: 
       edges: []
@@ -185,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      my-meiker-1742039930951398 2_0: 7308371618840492704
-      my-meiker-1742039930951398 2_1: 7539196088841583834
-      my-meiker-1742039930951398 2_2: -8071425741008839864
+      96a8247e-4646-4092-b562-63ec2232d03e (1)_0: 5306571962453655275
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

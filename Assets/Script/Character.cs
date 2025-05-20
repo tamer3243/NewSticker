@@ -35,13 +35,12 @@ public class Character : MonoBehaviour, ICharacter
     public void InitStat()
     {
 
-        currentAttribute = new(data.baseStat.hp, data.baseStat.atk, data.baseStat.atkSpd, data.baseStat.stamina, data.baseStat.mana);
+        currentAttribute = new(data.baseStat.hp, data.baseStat.atk,  data.baseStat.stamina, data.baseStat.mana);
         ItemStat totalStatBonus = new ItemStat();
         Backpack.items.ForEach(item => totalStatBonus += item.statbonus);
 
         currentAttribute.hp.Modifiers.Add(Modifier.Plus(totalStatBonus.hp, "+hp"));
         currentAttribute.atk.Modifiers.Add(Modifier.Plus(totalStatBonus.atk, "+atk"));
-        currentAttribute.atkSpd.Modifiers.Add(Modifier.Plus(totalStatBonus.atkSpd, "+atkSpd"));
         currentAttribute.stamina.Modifiers.Add(Modifier.Plus(totalStatBonus.stamina, "+stamina"));
         currentAttribute.mana.Modifiers.Add(Modifier.Plus(totalStatBonus.mana, "+mana"));
 
