@@ -17,18 +17,23 @@ public class HorizontalCardHolder : MonoBehaviour
     private RectTransform rect;
 
     public List<Card> cards;
-
+    public List<GameObject> cardSlot;
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
+    private int slotCount=5;
 
-
-    public void Spawn(List<CharacterData> data)
+    [ButtonMethod]
+    public void Spawn()
     {
-        for (int i = 0; i < data.Count; i++)
+        for (int i = 0; i < slotCount; i++)
         {
-            Instantiate(slotPrefab, transform);
+            var x = Instantiate(slotPrefab, transform);
+            cardSlot.Add(x);
         }
-
+    }
+    [ButtonMethod]
+    public void Reload()
+    {
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
         int cardCount = 0;
@@ -40,11 +45,6 @@ public class HorizontalCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.name = cardCount.ToString();
-            if (data[cardCount] != null)
-            {
-                card.SetData(data[cardCount]);
-                card.Init();
-            }
             cardCount++;
         }
 
@@ -110,27 +110,20 @@ public class HorizontalCardHolder : MonoBehaviour
         if (isCrossing)
             return;
 
-        for (int i = 0; i < cards.Count; i++)
+        for (int i = 0; i < cardSlot.Count; i++)
         {
+            float selectedX = selectedCard.transform.position.x;
+            float slotX = cardSlot[i].transform.position.x;
 
-            if (selectedCard.transform.position.x > cards[i].transform.position.x)
+            // Nếu selectedCard kéo qua trái hoặc phải slot[i]
+            if ((selectedX > slotX && selectedCard.ParentIndex() < i) ||
+                (selectedX < slotX && selectedCard.ParentIndex() > i))
             {
-                if (selectedCard.ParentIndex() < cards[i].ParentIndex())
-                {
-                    Swap(i);
-                    break;
-                }
-            }
-
-            if (selectedCard.transform.position.x < cards[i].transform.position.x)
-            {
-                if (selectedCard.ParentIndex() > cards[i].ParentIndex())
-                {
-                    Swap(i);
-                    break;
-                }
+                Swap(i); // Swap hoặc Move vào slot đó
+                break;
             }
         }
+
     }
 
     void Swap(int index)
@@ -138,21 +131,29 @@ public class HorizontalCardHolder : MonoBehaviour
         isCrossing = true;
 
         Transform focusedParent = selectedCard.transform.parent;
-        Transform crossedParent = cards[index].transform.parent;
+        Transform crossedParent = cardSlot[index].transform;
 
-        cards[index].transform.SetParent(focusedParent);
-        cards[index].transform.localPosition = cards[index].selected ? new Vector3(0, cards[index].selectionOffset, 0) : Vector3.zero;
+        // Tìm card đang ở slot[index] nếu có
+        Card targetCard = cards.FirstOrDefault(card => card.transform.parent == crossedParent);
+
+        if (targetCard != null && targetCard != selectedCard)
+        {
+
+            bool swapIsRight = targetCard.ParentIndex() > selectedCard.ParentIndex();
+            // Di chuyển targetCard về slot cũ của selectedCard
+            targetCard.transform.SetParent(cardSlot[index - 1 * (swapIsRight ? 1 : -1)].transform);
+            targetCard.transform.localPosition = targetCard.selected ? new Vector3(0, targetCard.selectionOffset, 0) : Vector3.zero;
+
+            // Visual swap animation
+            targetCard.cardVisual.Swap(swapIsRight ? -1 : 1);
+        }
+
+        // Di chuyển selectedCard đến slot[index]
         selectedCard.transform.SetParent(crossedParent);
 
         isCrossing = false;
 
-        if (cards[index].cardVisual == null)
-            return;
-
-        bool swapIsRight = cards[index].ParentIndex() > selectedCard.ParentIndex();
-        cards[index].cardVisual.Swap(swapIsRight ? -1 : 1);
-
-        //Updated Visual Indexes
+        // Cập nhật lại index visuals
         foreach (Card card in cards)
         {
             card.cardVisual.UpdateIndex(transform.childCount);

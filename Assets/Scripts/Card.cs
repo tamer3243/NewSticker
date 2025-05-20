@@ -42,7 +42,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public UnityEvent<Card, bool> SelectEvent;
 
 
-   public void Init()
+    public void Init()
     {
         canvas = GetComponentInParent<Canvas>();
         imageComponent = GetComponent<Image>();
@@ -58,8 +58,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public void SetData(CharacterData data)
     {
         if (data != null) character.data = data;
-  
-       
+
+
     }
 
     void Update()
@@ -73,7 +73,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             Vector2 velocity = direction * Mathf.Min(moveSpeedLimit, Vector2.Distance(transform.position, targetPosition) / Time.deltaTime);
             transform.Translate(velocity * Time.deltaTime);
         }
+
+        // Always clamp Z to 0
+        Vector3 fixZ = transform.position;
+        fixZ.z = 0;
+        transform.position = fixZ;
     }
+
 
     void ClampPosition()
     {
